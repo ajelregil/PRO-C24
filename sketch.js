@@ -3,9 +3,10 @@ const World = Matter.World;
 const Bodies = Matter.Bodies;
 const Constraint = Matter.Constraint;
 
-var engine, world;
+var engine, world,angle;
 var arrow,canvas;
 var palyer, playerBase, playerArcher;
+var pArrows;
 var playerArrows = [];
 
 
@@ -22,7 +23,7 @@ function setup() {
   world = engine.world;
 
   angleMode(DEGREES);
-
+  angle = 15
   var options = {
     isStatic: true
   };
@@ -41,7 +42,7 @@ function setup() {
     120
   );
 
-  
+  pArrows = new PlayerArrow(playerArcher.x, playerArcher.y);
 }
 
 function draw() {
@@ -61,9 +62,27 @@ function draw() {
    
 }
 
-function keyReleased(){
-  if(keyCode === 32){
-    arrow.shoot(PlayerArcher.body.angle)
-}
+// function keyReleased(){
+//   if(keyCode === 32){
+//     pArrows.shoot(PlayerArcher.body.angle)
+// }
+// }
+
+function keyReleased(){ 
+  if(keyCode === 32){  
+    pArrows.shoot(playerArcher.body.angle)
+  }
 }
 
+function keyPressed(){
+ // console.log(keyCode)
+  if(keyCode=== 32){ 
+    var pArrows = new PlayerArrow(playerArcher.x, playerArcher.y);
+   playerArrows.push(pArrows)
+  }
+}
+function showCannonBalls(pArrows, i){
+  if(pArrows){
+    pArrows.display()
+  }
+}
